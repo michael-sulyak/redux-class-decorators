@@ -6,7 +6,7 @@
 [![NPM](https://img.shields.io/npm/v/react-apps.svg?style=flat-square)](https://www.npmjs.com/package/react-apps)  [![GitHub Issues](https://img.shields.io/github/issues/expert-m/react-apps.svg?style=flat-square)](https://github.com/expert-m/react-apps/issues)   [![Gitter](https://img.shields.io/badge/gitter-join_chat-blue.svg?style=flat-square)](https://gitter.im/expert-m/react-apps)  [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 
-## Table of content
+## Table Of Contents
 - [Installation](#installation)
     - [npm](#npm)
     - [yarn](#yarn)
@@ -15,11 +15,11 @@
     - [modules.Apps](#modules.apps)
         - ["Blocks"](#blocks---kill-feature) - Killer feature!
         - ["Dynamic Blocks"](#dynamic-blocks)
-    - [modules.Store (Redux)](#modules.store-redux)
-    - [modules.Router](#modules.router)
-    - [modules.SSR](#modules.ssr)
-    - [modules.Request](#modules.request)
-    - [modules.Helmet](#modules.helmet)
+    - [modules.Store (Redux)](#modulesstore-redux)
+    - [modules.Router](#modulesrouter)
+    - [modules.SSR](#modulesssr)
+    - [modules.Request](#modulesrequest)
+    - [modules.Helmet](#moduleshelmet)
 - [How To Create A New Module](#how-to-create-a-new-module)
 - [License](#license)
 
@@ -39,7 +39,7 @@ yarn add react-apps
 ---
 
 ## How To Use
-Examples: [first](https://github.com/expert-m/react-apps/tree/master/examples/client), [second](https://github.com/expert-m/react-apps/tree/master/examples/ssr) (with SSR).
+Examples: [first](https://github.com/expert-m/react-apps/tree/master/examples/client) ([demo](https://expert-m.github.io/react-apps/)), [second](https://github.com/expert-m/react-apps/tree/master/examples/ssr) (with SSR).
 
 **react-apps** includes many ready solutions (`modules`) for different purposes. A list of `modules` must be specified when creating `Core`.
 ```js
@@ -57,11 +57,11 @@ By adding modules you can change a behavior of your application.
 
 Example:
 
-- [modules.Store](#modules.store), [modules.Apps](#modules.apps) - allows you to create `Redux` store through `Core`.
-- [modules.Store](#modules.store), [modules.Apps](#modules.apps), [modules.SSR](#modules.ssr) - now you can easily render a component on your server.
-- [modules.Store](#modules.store), [modules.Apps](#modules.apps), [modules.SSR](#modules.ssr), [modules.Helmet](#modules.helmet), [modules.Router](#modules.router) - this adds data for document head and routing via `react-router`.
+- [modules.Store](#modulesstore-redux), [modules.Apps](#modulesapps) - allows you to create `Redux` store through `Core`.
+- [modules.Store](#modulesstore-redux), [modules.Apps](#modulesapps), [modules.SSR](#modulesssr) - now you can easily render a component on your server.
+- [modules.Store](#modulesstore-redux), [modules.Apps](#modulesapps), [modules.SSR](#modulesssr), [modules.Helmet](#moduleshelmet), [modules.Router](#modulesrouter) - this adds data for document head and routing via `react-router`.
 
-*Example of using [modules.Store](#modules.store) and [modules.Apps](#modules.apps):*
+*Example of using [modules.Store](#modulesstore-redux) and [modules.Apps](#modulesapps):*
 
 **1. Create app.js**
 
@@ -180,7 +180,7 @@ export default config
 ## Ready Solutions (modules)
 > Divide your application into small parts (`apps`)!
 #### modules.Apps
-Dependencies: `redux`, `redux-thunk`, [modules.Store](#modules.store).
+Dependencies: `redux`, `redux-thunk`, [modules.Store](#mmodulesstore-redux).
 ```bash
 npm install redux redux-thunk
 ```
@@ -384,12 +384,7 @@ Dependencies: `express`, `react-dom`, `serialize-javascript`.
 npm install express react-dom serialize-javascript
 ```
 
-- Standard modules use [express](https://github.com/expressjs/express) for SSR. Install [express](https://github.com/expressjs/express) if needed:
-```bash
-npm install express
-```
-
-- You have to install [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) if want use module [modules.Request](#modules.request) in SSR:
+- You have to install [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) if want use module [modules.Request](#modulesrequest) in SSR:
 ```bash
 npm install isomorphic-fetch
 ```
@@ -416,7 +411,7 @@ app.use('/', (req, res) => {
 ---
 
 #### modules.Request
-Dependencies: `isomorphic-fetch` (only for [modules.SSR](#modules.ssr)).
+Dependencies: `isomorphic-fetch` (only for [modules.SSR](#modulesssr)).
 ```bash
 npm install isomorphic-fetch
 ```
@@ -449,7 +444,7 @@ core.req.fetch('get', 'https://example2.com/api/users', data, headers).then(...)
 ---
 
 #### modules.Helmet
-> Adds `Helmet` data for [modules.SSR](#modules.ssr).
+> Adds `Helmet` data for [modules.SSR](#modulesssr).
 
 Dependencies: `react-helmet`.
 ```bash
