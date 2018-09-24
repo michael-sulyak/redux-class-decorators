@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <%- helmet.title.toString() %>
+    <%- helmet.meta.toString() %>
+    <link href="/<%= assets['main.css'] %>" rel="stylesheet">
+    <%- helmet.link.toString() %>
+</head>
+
+<body>
+
+<div id="root"><%- app %></div>
+
+<script>
+    window.__INITIAL_STATE__=<%- initialState %>
+</script>
+
+<script src="/<%= assets['main.js'] %>"></script>
+
+</body>
+
+</html>
