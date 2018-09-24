@@ -12,7 +12,7 @@
     - [yarn](#yarn)
 - [How To Use](#how-to-use)
 - [Ready Solutions (modules)](#ready-solutions-modules)
-    - [modules.Apps](#modules.apps)
+    - [modules.Apps](#modulesapps)
         - ["Blocks"](#blocks---kill-feature) - Killer feature!
         - ["Dynamic Blocks"](#dynamic-blocks)
     - [modules.Store (Redux)](#modulesstore-redux)
@@ -180,7 +180,7 @@ export default config
 ## Ready Solutions (modules)
 > Divide your application into small parts (`apps`)!
 #### modules.Apps
-Dependencies: `redux`, `redux-thunk`, [modules.Store](#mmodulesstore-redux).
+Dependencies: `redux`, `redux-thunk`, [modules.Store](#modulesstore-redux).
 ```bash
 npm install redux redux-thunk
 ```
