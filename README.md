@@ -65,6 +65,9 @@ or
 $ yarn add react-rambo react-dom react-helmet redux react-redux react-router-config react-router-dom
 $ yarn add --dev express isomorphic-fetch
 ```
+
+[back to top](#table-of-contents)
+
 ---
 
 ## How To Use
@@ -72,7 +75,7 @@ $ yarn add --dev express isomorphic-fetch
 * [First](https://github.com/expert-m/react-rambo/tree/master/examples/client) ([Demo](https://expert-m.github.io/react-rambo/))
 * [Second](https://github.com/expert-m/react-rambo/tree/master/examples/ssr) (with SSR)
 
-**react-rambo** includes many ready solutions (`modules`) for different purposes. A list of `modules` must be specified when creating `Core`.
+`react-rambo` includes many ready solutions (`modules`) for different purposes. A list of `modules` must be specified when creating `Core`.
 ```js
 const config = {
     modules: [modules.Store, modules.Apps],
@@ -393,7 +396,7 @@ $ npm install react-router react-router-config react-router-dom
 ```
 
 **Example:**
-coreConfig.js
+*coreConfig.js*
 ```js
 const routes = [{
     component: AppRoot,
@@ -406,7 +409,7 @@ const core = new Core({
 })
 ```
 
-UserList.js (if you use `SSR`)
+*UserList.js* (if you use `SSR`)
 ```js
 class UserList extends Component {
     static componentWillRenderOnServer(core, props) { // props = { res, req, match, location: { path, search }, store, ... }
