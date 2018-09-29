@@ -13,6 +13,7 @@
 <br>
 
 ## Table Of Contents
+- [Overview](#overview)
 - [Installation](#installation)
     - [npm](#npm)
     - [yarn](#yarn)
@@ -31,6 +32,12 @@
 
 ---
 
+## Overview
+
+The main feature of `react-rambo` is ["Blocks"](#blocks---kill-feature) which makes work simple with `React` + `Redux`. But `react-rambo` is not only ["Blocks"](#blocks---kill-feature). It provides ready [server-side rendering](#modulesssr), [routing](#modulesrouter) (this works together with the SSR) and a bunch of other features with which you can quickly create a new application on `React` or improve a old application.
+
+---
+
 ## Installation
 
 #### npm
@@ -43,7 +50,9 @@ $ npm install react-rambo
 $ yarn add react-rambo
 ```
 
-**If you want to use all `modules`:**
+---
+
+If you want to use all `modules`:
 
 ```bash
 $ npm install react-rambo react-dom react-helmet redux react-redux react-router-config react-router-dom
@@ -201,6 +210,7 @@ export default config
 
 ## Ready Solutions (modules)
 > Divide your application into small parts (`apps`)!
+
 #### modules.Apps
 Dependencies: `redux`, `redux-thunk`, [modules.Store](#modulesstore-redux).
 ```bash
@@ -382,7 +392,8 @@ Dependencies: `react-router`, `react-router-config`, `react-router-dom`.
 $ npm install react-router react-router-config react-router-dom
 ```
 
-Example:
+**Example:**
+coreConfig.js
 ```js
 const routes = [{
     component: AppRoot,
@@ -395,6 +406,18 @@ const core = new Core({
 })
 ```
 
+UserList.js (if you use `SSR`)
+```js
+class UserList extends Component {
+    static componentWillRenderOnServer(core, props) { // props = { res, req, match, location: { path, search }, store, ... }
+        return Promise.all([
+            core.apps.users.list.get({ 'page': 3 })(props.store.dispatch, props.store.getState),
+        ])
+    }
+    ...
+```
+
+
 See [React Router](https://github.com/ReactTraining/react-router).
 
 [back to top](#table-of-contents)
@@ -402,7 +425,7 @@ See [React Router](https://github.com/ReactTraining/react-router).
 ---
 
 #### modules.SSR
-> Server-side rendering :sunglasses:.
+> Server-side rendering :sunglasses:
 
 Dependencies: `express`, `react-dom`, `serialize-javascript`.
 ```bash
