@@ -1,13 +1,15 @@
-# react-rambo
+<h1 align="center">
+    <img src="https://raw.githubusercontent.com/expert-m/react-rambo/master/logo.jpg" alt="react-rambo" />
+    react-rambo
+</h1>
+
+<h4 align="center">Develop your React applications quickly and easily!</h4>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/expert-m/react-rambo/master/logo.jpg" alt="react-rambo" />
+    <a href="https://www.npmjs.com/package/react-rambo"><img src="https://img.shields.io/npm/v/react-rambo.svg?style=flat-square" alt="NPM"></a>  <a href="https://scrutinizer-ci.com/g/expert-m/react-rambo/?branch=master"><img src="https://img.shields.io/scrutinizer/g/expert-m/react-rambo.svg?style=flat-square" alt="Scrutinizer Code Quality"></a>  <a href="https://scrutinizer-ci.com/g/expert-m/react-rambo/build-status/master"><img src="https://img.shields.io/scrutinizer/build/g/expert-m/react-rambo.svg?style=flat-square" alt="Build Status"></a>  <a href="https://github.com/expert-m/react-rambo/issues"><img src="https://img.shields.io/github/issues/expert-m/react-rambo.svg?style=flat-square" alt="GitHub Issues"></a>  <a href="https://david-dm.org/expert-m/react-rambo?type=peer"><img src="https://david-dm.org/expert-m/react-rambo/peer-status.svg?style=flat-square" alt="peerDependencies Status"></a>  <a href="https://gitter.im/expert_m/react-rambo"><img src="https://img.shields.io/badge/gitter-join_chat-blue.svg?style=flat-square" alt="Gitter"></a>  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License"></a>
 </p>
 
-> Develop your React applications quickly and easily!
-
-[![NPM](https://img.shields.io/npm/v/react-rambo.svg?style=flat-square)](https://www.npmjs.com/package/react-rambo)  [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/expert-m/react-rambo.svg?style=flat-square)](https://scrutinizer-ci.com/g/expert-m/react-rambo/?branch=master)  [![Build Status](https://img.shields.io/scrutinizer/build/g/expert-m/react-rambo.svg?style=flat-square)](https://scrutinizer-ci.com/g/expert-m/react-rambo/build-status/master)  [![GitHub Issues](https://img.shields.io/github/issues/expert-m/react-rambo.svg?style=flat-square)](https://github.com/expert-m/react-rambo/issues)  [![peerDependencies Status](https://david-dm.org/expert-m/react-rambo/peer-status.svg?style=flat-square)](https://david-dm.org/expert-m/react-rambo?type=peer)  [![Gitter](https://img.shields.io/badge/gitter-join_chat-blue.svg?style=flat-square)](https://gitter.im/expert_m/react-rambo)  [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-
+<br>
 
 ## Table Of Contents
 - [Installation](#installation)
@@ -40,7 +42,7 @@ $ npm install react-rambo
 $ yarn add react-rambo
 ```
 
-**If you want to use all modules:**
+**If you want to use all `modules`:**
 
 ```bash
 $ npm install react-rambo react-dom react-helmet redux react-redux react-router-config react-router-dom
