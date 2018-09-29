@@ -2,7 +2,7 @@ import Router from './Router'
 import Core from '../Core'
 
 
-it('init', () => {
+it('Add module `Router`', () => {
     const core = new Core({
         modules: [Router],
     })

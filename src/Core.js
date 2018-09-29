@@ -37,11 +37,11 @@ class Core {
         return Core._instance
     }
 
-    _registerModule(module) {
-        const instance = new module(this)
+    _registerModule(Module) {
+        const instance = new Module(this)
 
         if (instance.name in this) {
-            throw new Error(`Module '${module.name}' already exists.`)
+            throw new Error(`Module '${Module.name}' already exists.`)
         }
 
         this[instance.name] = instance
@@ -84,11 +84,7 @@ class Core {
     }
 
     event(eventName, data) {
-        if (this.debug) {
-            this.logger.log(eventName, '⚡️')
-        }
-
-        if (eventName in this.handlers && this.handlers[eventName].length) {
+        if (eventName in this.handlers) {
             for (const handler of this.handlers[eventName]) {
                 handler(data)
             }
@@ -96,11 +92,7 @@ class Core {
     }
 
     asyncEvent(eventName, data) {
-        if (this.debug) {
-            this.logger.log(`${eventName} (async)`, '⚡️')
-        }
-
-        if (eventName in this.asyncHandlers && this.asyncHandlers[eventName].length) {
+        if (eventName in this.asyncHandlers) {
             return Promise.all(this.asyncHandlers[eventName].map(asyncHandler => (
                 asyncHandler(data)
             )))

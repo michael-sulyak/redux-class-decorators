@@ -45,7 +45,7 @@ it('core.hasModule()', () => {
     }
 
     const core = new Core({
-        modules: [TestModule],
+        modules: [ TestModule ],
     })
 
 
@@ -61,7 +61,7 @@ it('core.event() and core.handle()', () => {
         flag = data.x
     })
 
-    core.event('test event', {x: true})
+    core.event('test event', { x: true })
 
     expect(flag).toBeTruthy()
 })
@@ -79,7 +79,7 @@ it('core.asyncEvent() and core.asyncHandle()', async () => {
         })
     })
 
-    await core.asyncEvent('test event', {x: true})
+    await core.asyncEvent('test event', { x: true })
 
     expect(flag).toBeTruthy()
 })

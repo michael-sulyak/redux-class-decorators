@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Core } from 'react-apps'
+import PropTypes from 'prop-types'
 import coreConfig from '../../coreConfig'
 
 
@@ -11,14 +12,13 @@ const core = Core.getInstance(coreConfig)
 class UserList extends Component {
     static componentWillRenderOnServer(core, props) {
         return Promise.all([
-            core.apps.users.list.get({'page': 3})(props.store.dispatch, props.store.getState),
+            core.apps.users.list.get({ 'page': 3 })(props.store.dispatch, props.store.getState),
         ])
     }
 
     componentDidMount() {
-        console.log('userList', this.props.userList)
         if (!this.props.userList.value) {
-            this.props.getUserList({'page': 3})
+            this.props.getUserList({ 'page': 3 })
         }
     }
 
@@ -38,9 +38,12 @@ class UserList extends Component {
                         {i + 1}. {user.first_name} {user.last_name}
                     </div>
                 ))}
-                <br/>
-                <a href="https://github.com/expert-m/react-apps/"
-                   target="_blank" rel="noopener noreferrer">
+                <br />
+                <a
+                    href="https://github.com/expert-m/react-apps/tree/master/examples/ssr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
                     GitHub
                 </a>
             </div>
@@ -48,6 +51,11 @@ class UserList extends Component {
     }
 }
 
+UserList.propTypes = {
+    title: PropTypes.string,
+    userList: PropTypes.object,
+    getUserList: PropTypes.func,
+}
 
 const mapStateToProps = (state) => ({
     title: state.users.title,

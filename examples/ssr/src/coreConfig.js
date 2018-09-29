@@ -6,17 +6,43 @@ export default function getCoreConfig() {
     const config = {
         modules: [
             modules.Store,
-            modules.Request,
+            modules.Requests,
             modules.Apps,
             modules.Helmet,
             modules.Router,
         ],
-        defaultHost: 'https://reqres.in/api',
         apps: [
             require('./apps/users/app').default,
         ],
         componentForSSR: require('./components/AppServer').default,
         routes: require('./routes').default,
+        requests: {
+            middlewares: {
+                prepareData: (data) => {
+                    if (!data.headers['Content-Type']) {
+                        data.headers['Content-Type'] = 'application/json'
+                    }
+
+                    if (data.body && data.headers['Content-Type'] === 'application/json') {
+                        data.body = JSON.stringify(data.body)
+                    }
+                },
+                prepareResult: (response) => {
+                    if (response.status >= 500) {
+                        console.log('Error!')
+                        throw Error(response)
+                    }
+
+                    return response.json().then(json => ({
+                        json: json,
+                        response: response,
+                        status: response.status,
+                        ok: response.ok,
+                    }))
+                },
+            },
+            defaultHost: 'https://reqres.in/api',
+        }
     }
 
     if (global.IS_SERVER) {

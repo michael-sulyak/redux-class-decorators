@@ -13,7 +13,7 @@ const store = core.store.createStore()
 
 ReactDOM.render(
     <Provider store={store}>
-        <UserList/>
+        <UserList />
     </Provider>,
     document.getElementById('root'),
 )

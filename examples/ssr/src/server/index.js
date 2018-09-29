@@ -8,7 +8,7 @@ const path = require('path')
 const express = require('express')
 const serialize = require('serialize-javascript')
 const serveStatic = require('serve-static')
-const {Core} = require('react-apps')
+const { Core } = require('react-apps')
 const getCoreConfig = require('../coreConfig').default
 const assets = require('../../build/asset-manifest.json')
 
@@ -26,7 +26,7 @@ app.use('/', (req, res) => {
 
         core.ssr.render(req, res).then(data => {
             res.render('./template.ejs', {
-                initialState: serialize(data.props.store.getState(), {isJSON: true}),
+                initialState: serialize(data.props.store.getState(), { isJSON: true }),
                 assets,
                 app: data.html,
                 helmet: data.helmet,

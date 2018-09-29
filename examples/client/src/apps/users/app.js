@@ -32,13 +32,13 @@ function describeApp(app, req) {
             }),
         },
         methods: {
-            'get': (params) => ((dispatch, getState) => {
+            'get': (params) => (dispatch, getState) => {
                 dispatch('start')
 
                 return req.get('/users', params).then((data) => {
                     dispatch('finish', data.json.data)
                 })
-            }),
+            },
         },
     })
 }

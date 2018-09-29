@@ -2,7 +2,7 @@ import Core from './Core'
 import Logger from './modules/Logger'
 import Store from './modules/Store'
 import HelmetModule from './modules/HelmetModule'
-import Request from './modules/Request'
+import Requests from './modules/Requests'
 import SSR from './modules/SSR'
 import AppsModule from './modules/Apps/AppsModule'
 import BaseApp from './modules/Apps/BaseApp'
@@ -13,7 +13,7 @@ const modules = {
     Logger,
     Store,
     Helmet: HelmetModule,
-    Request,
+    Requests,
     SSR,
     Apps: AppsModule,
     Router,

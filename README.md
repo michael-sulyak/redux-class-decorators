@@ -3,7 +3,7 @@
 
 [![NPM](https://nodei.co/npm/react-apps.png?compact=true)](https://www.npmjs.com/package/react-apps)
 
-[![NPM](https://img.shields.io/npm/v/react-apps.svg?style=flat-square)](https://www.npmjs.com/package/react-apps)  [![GitHub Issues](https://img.shields.io/github/issues/expert-m/react-apps.svg?style=flat-square)](https://github.com/expert-m/react-apps/issues)   [![Gitter](https://img.shields.io/badge/gitter-join_chat-blue.svg?style=flat-square)](https://gitter.im/expert-m/react-apps)  [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![NPM](https://img.shields.io/npm/v/react-apps.svg?style=flat-square)](https://www.npmjs.com/package/react-apps)  [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/expert-m/react-apps.svg?style=flat-square)](https://scrutinizer-ci.com/g/expert-m/react-apps/?branch=master)  [![Build Status](https://img.shields.io/scrutinizer/build/g/expert-m/react-apps.svg?style=flat-square)](https://scrutinizer-ci.com/g/expert-m/react-apps/build-status/master)  [![GitHub Issues](https://img.shields.io/github/issues/expert-m/react-apps.svg?style=flat-square)](https://github.com/expert-m/react-apps/issues)  [![Gitter](https://img.shields.io/badge/gitter-join_chat-blue.svg?style=flat-square)](https://gitter.im/expert-m/react-apps)  [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 
 ## Table Of Contents
@@ -18,7 +18,7 @@
     - [modules.Store (Redux)](#modulesstore-redux)
     - [modules.Router](#modulesrouter)
     - [modules.SSR](#modulesssr)
-    - [modules.Request](#modulesrequest)
+    - [modules.Requests](#modulesrequests)
     - [modules.Helmet](#moduleshelmet)
 - [How To Create A New Module](#how-to-create-a-new-module)
 - [License](#license)
@@ -39,7 +39,9 @@ yarn add react-apps
 ---
 
 ## How To Use
-Examples: [first](https://github.com/expert-m/react-apps/tree/master/examples/client) ([demo](https://expert-m.github.io/react-apps/)), [second](https://github.com/expert-m/react-apps/tree/master/examples/ssr) (with SSR).
+Examples:
+* [First](https://github.com/expert-m/react-apps/tree/master/examples/client) ([Demo](https://expert-m.github.io/react-apps/))
+* [Second](https://github.com/expert-m/react-apps/tree/master/examples/ssr) (with SSR)
 
 **react-apps** includes many ready solutions (`modules`) for different purposes. A list of `modules` must be specified when creating `Core`.
 ```js
@@ -50,16 +52,16 @@ const config = {
 
 // Different variants of creation:
 core = new Core(config)
-core = Core.getInstance(config) // Singleton pattern
-core = Core.getInstance(() => config) // Calls the function if `Core` is not created
+core = Core.getInstance(config) // Use singleton pattern
+core = Core.getInstance(() => config) // Calls a function if `Core` is not created
 ```
 By adding modules you can change a behavior of your application.
 
 Example:
 
 - [modules.Store](#modulesstore-redux), [modules.Apps](#modulesapps) - allows you to create `Redux` store through `Core`.
-- [modules.Store](#modulesstore-redux), [modules.Apps](#modulesapps), [modules.SSR](#modulesssr) - now you can easily render a component on your server.
-- [modules.Store](#modulesstore-redux), [modules.Apps](#modulesapps), [modules.SSR](#modulesssr), [modules.Helmet](#moduleshelmet), [modules.Router](#modulesrouter) - this adds data for document head and routing via `react-router`.
+- [modules.Store](#modulesstore-redux), [modules.Apps](#modulesapps), [modules.SSR](#modulesssr) - now you can easily render your application on a server.
+- [modules.Store](#modulesstore-redux), [modules.Apps](#modulesapps), [modules.SSR](#modulesssr), [modules.Helmet](#moduleshelmet), [modules.Router](#modulesrouter) - this adds data for document head (`title`, `meta`, etc) and routing via `react-router`.
 
 *Example of using [modules.Store](#modulesstore-redux) and [modules.Apps](#modulesapps):*
 
@@ -73,7 +75,7 @@ export default class UsersApp extends base.BaseApp {
     name = 'users'
     mount(data) {
         describeApp(this, this.core.req)
-        return true
+        return true // Must return `true`. Otherwise the application will not be added.
     }
 }
 
@@ -91,12 +93,12 @@ function describeApp(app, req) {
             }),
         },
         methods: {
-            'get': (params) => ((dispatch, getState) => {
+            'get': (params) => (dispatch, getState) => {
                 dispatch('start')
-                return req.get('/users', params).then((data) => {
-                    dispatch('finish', data.json.data)
+                return req.get('/users', params).then((response) => ( // See `modules.Requests`
+                    response.json().then(json => dispatch('finish', json.data))
                 })
-            }),
+            },
         },
     })
     ...
@@ -115,13 +117,13 @@ my-app
             └── app.js
 ```
 
-**2. Realize component**
+**2. Realize a component**
 
 *UserList.js:*
 ```jsx
 class UserList extends Component {
     componentDidMount() {
-        this.props.getUserList({'page': 3})
+        this.props.getUserList({ 'page': 3 })
     }
 
     render() {
@@ -200,7 +202,7 @@ function finishFetchingUserList(payload) {
 
 // reducer.js
 const initialState = {
-    user: { list: { loading: false, value: null } }
+    users: { list: { loading: false, value: null } }
 }
 function reducer(state = initialState, action) {
     switch (action.type) {
@@ -219,7 +221,7 @@ fetchUser(params) {
     return (dispatch, getState) => {
         dispatch(startFetchingUserList())
         return req.get('/users', params).then((data) => {
-            dispatch(finishFetchingUserList(payload))
+            dispatch(finishFetchingUserList(data.json.data))
         }
     }
 }
@@ -236,19 +238,19 @@ const mapDispatchToProps = (dispatch) => ({
 ```
 New way (with `Blocks`): :blush:
 ```js
-app.addBlock('list', {
+core.apps.users.addBlock('list', {
     initialState: { loading: false, value: null },
     reducer: {
         'start': (state, action) => ({ ...state, loading: true }),
         'finish': (state, action) => ({ ...state, loading: false, value: action.payload }),
     },
     methods: {
-        'get': (params) => ((dispatch, getState) => {
+        'get': (params) => (dispatch, getState) => {
             dispatch('start')
             return req.get('/users', params).then((data) => {
                 dispatch('finish', data.json.data)
             })
-        }),
+        },
     },
 })
 
@@ -269,6 +271,9 @@ And now:
 - Less code.
 - Easier.
 
+* `dispatch('start')` can be written down like this:
+`dispatch('^list.start')` or`dispatch('#users.list.start')`
+
 [back to top](#table-of-contents)
 
 
@@ -277,9 +282,9 @@ Example:
 ```js
 // app.js
 ...
-app.addDynamicBlock('banner', {
+core.apps.banners.addDynamicBlock('list', {
     initialState: { loading: false, value: null },
-    index: 'type',
+    index: 'type', // is an important parameter
     reducer: {
         'start': (state, action) => ({ ...state, loading: true }),
         'finish': (state, action) => ({ ...state, loading: false, value: action.payload }),
@@ -300,7 +305,7 @@ app.addDynamicBlock('banner', {
 // MyComponent.js
 class MyComponent extends Component {
     componentDidMount() {
-        this.props.getBanner({'type': 'left'})
+        this.props.getBanner({'type': 'left'}) // A index (`type` in this case) must be present in the arguments.
         this.props.getBanner({'type': 'right'})
     }
     render() {
@@ -314,13 +319,12 @@ class MyComponent extends Component {
 
 const core = Core.getInstance(getCoreConfig)
 const mapStateToProps = (state) => ({
-    banner: state.banners.banner,
+    banners: state.banners.list,
 })
 const mapDispatchToProps = (dispatch) => ({
-    getBanner: bindActionCreators(core.apps.banners.banner.get, dispatch),
+    getBanner: bindActionCreators(core.apps.banners.list.get, dispatch),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(MyComponent)
-
 ```
 
 
@@ -384,7 +388,7 @@ Dependencies: `express`, `react-dom`, `serialize-javascript`.
 npm install express react-dom serialize-javascript
 ```
 
-- You have to install [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) if want use module [modules.Request](#modulesrequest) in SSR:
+- You have to install [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) if want use module [modules.Requests](#modulesrequests) in SSR:
 ```bash
 npm install isomorphic-fetch
 ```
@@ -392,6 +396,9 @@ npm install isomorphic-fetch
 Example:
 ```js
 require('isomorphic-fetch')
+
+const express = require('express')
+const app = express()
 
 app.use('/', (req, res) => {
     const core = new Core(coreConfig)
@@ -410,7 +417,7 @@ app.use('/', (req, res) => {
 
 ---
 
-#### modules.Request
+#### modules.Requests
 Dependencies: `isomorphic-fetch` (only for [modules.SSR](#modulesssr)).
 ```bash
 npm install isomorphic-fetch
@@ -419,9 +426,24 @@ npm install isomorphic-fetch
 Example:
 ```js
 const core = new Core({
-    modules: [modules.Request, ...]
-    requestMiddleware: [(requestDataForFetch) => {}],
-    defaultHost: 'https://example.com/api/',
+    modules: [modules.Requests, ...],
+    requests: {
+        middlewares: {
+            prepareData: (data) => {
+                data.headers['Content-Type'] = 'application/json'
+                data.body = data.body && JSON.stringify(data.body)
+            },
+            prepareResult: (response) => (
+                response.json().then(json => ({
+                    json,
+                    response,
+                    status: response.status,
+                    ok: response.ok,
+                }))
+            ),
+        },
+        defaultHost: 'https://reqres.in/api', // now you can write: req.get('/users/59/')
+    },
 })
 
 core.req.get('/users', params).then((data) => {

@@ -91,7 +91,7 @@ export default class BaseApp {
     _getBlock(blockName) {
         if (blockName in this.blocks) {
             return this.blocks[blockName]
-        } else {
+        } else if (this.core.debug) {
             this.logs.warn(`I can't get block '${blockName}'.`)
         }
     }

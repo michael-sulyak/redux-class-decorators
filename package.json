@@ -1,6 +1,6 @@
 {
   "name": "react-apps",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Develop your React applications quickly and easily!",
   "author": "expert-m",
   "license": "MIT",
@@ -9,7 +9,7 @@
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
   "engines": {
-    "node": ">=8"
+    "node": ">=8.10.0"
   },
   "scripts": {
     "test": "cross-env CI=1 react-scripts test --env=jsdom",
@@ -27,13 +27,13 @@
   },
   "keywords": [
     "react",
+    "redux",
+    "ssr",
     "router",
     "express",
     "modules",
     "apps",
-    "blocks",
-    "redux",
-    "ssr"
+    "blocks"
   ],
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -44,7 +44,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "cross-env": "^5.1.4",
     "eslint": "^5.0.1",
-    "eslint-config-standard": "^11.0.0",
+    "eslint-config-standard": "^12.0.0",
     "eslint-config-standard-react": "^6.0.0",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-node": "^7.0.1",

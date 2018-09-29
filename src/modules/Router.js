@@ -12,37 +12,35 @@ export default class Router {
         const core = this.core
         this.routes = data.routes
 
+        // Call componentWillRenderOnServer()
         core.asyncHandle('beforeRenderComponentOnServer', async (data) => {
-            const {req} = data
+            const { req } = data
 
-            // Use PATH from url because of invalid query params processing
-            // by react router if route has "exact: true"
-            const matchingRoutes = matchRoutes(
-                this.routes,
-                req.url.split('?')[0],
-            )
+            const [ path, search ] = req.url.split('?')
+            const matchingRoutes = matchRoutes(this.routes, path)
 
-            for (const {route, match} of matchingRoutes) {
+            for (const { route, match } of matchingRoutes) {
                 const props = {
                     ...data.props,
                     match: match.params,
                     location: {
-                        search: req.url.split('?')[1] || '',
-                        path: req.url.split('?')[0],
+                        path,
+                        search: search || '',
                     },
                 }
 
-                await core.event('componentWillRenderOnServer', props)
+                await core.asyncEvent('componentWillRenderOnServer', props)
                 const componentWillRenderOnServer = route.component.componentWillRenderOnServer
 
                 if (componentWillRenderOnServer instanceof Function) {
-                   await componentWillRenderOnServer(core, props)
+                    await componentWillRenderOnServer(core, props)
                 }
             }
         })
 
+        // Add status for HTTP response or redirect
         core.asyncHandle('afterRenderComponentOnServer', data => {
-            const {res, props} = data
+            const { res, props } = data
 
             if (props.context.url) {
                 res.redirect(301, props.context.url)
