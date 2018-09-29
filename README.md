@@ -32,26 +32,26 @@
 
 #### npm
 ```bash
-npm install react-rambo
+$ npm install react-rambo
 ```
 
 #### yarn
 ```bash
-yarn add react-rambo
+$ yarn add react-rambo
 ```
 
-*If you want to use all modules:*
+**If you want to use all modules:**
 
 ```bash
-npm install react-rambo react-dom react-helmet redux react-redux react-router-config react-router-dom
-npm install --save-dev express isomorphic-fetch
+$ npm install react-rambo react-dom react-helmet redux react-redux react-router-config react-router-dom
+$ npm install --save-dev express isomorphic-fetch
 ```
 
 or
 
 ```bash
-yarn add react-rambo react-dom react-helmet redux react-redux react-router-config react-router-dom
-yarn add --dev express isomorphic-fetch
+$ yarn add react-rambo react-dom react-helmet redux react-redux react-router-config react-router-dom
+$ yarn add --dev express isomorphic-fetch
 ```
 ---
 
@@ -201,7 +201,7 @@ export default config
 #### modules.Apps
 Dependencies: `redux`, `redux-thunk`, [modules.Store](#modulesstore-redux).
 ```bash
-npm install redux redux-thunk
+$ npm install redux redux-thunk
 ```
 
 ##### "Blocks" - Kill feature!
@@ -293,6 +293,7 @@ And now:
 
 [back to top](#table-of-contents)
 
+---
 
 ##### "Dynamic Blocks"
 Example:
@@ -352,7 +353,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(MyComponent)
 #### modules.Store (Redux)
 Dependencies: `redux`, `redux-thunk`.
 ```bash
-npm install redux redux-thunk
+$ npm install redux redux-thunk
 ```
 
 Example:
@@ -375,7 +376,7 @@ See [React Redux](https://github.com/reduxjs/react-redux).
 #### modules.Router
 Dependencies: `react-router`, `react-router-config`, `react-router-dom`.
 ```bash
-npm install react-router react-router-config react-router-dom
+$ npm install react-router react-router-config react-router-dom
 ```
 
 Example:
@@ -402,12 +403,12 @@ See [React Router](https://github.com/ReactTraining/react-router).
 
 Dependencies: `express`, `react-dom`, `serialize-javascript`.
 ```bash
-npm install express react-dom serialize-javascript
+$ npm install express react-dom serialize-javascript
 ```
 
 - You have to install [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) if you want to use module [modules.Requests](#modulesrequests) in SSR:
 ```bash
-npm install isomorphic-fetch
+$ npm install isomorphic-fetch
 ```
 
 Example:
@@ -437,7 +438,7 @@ app.use('/', (req, res) => {
 #### modules.Requests
 Dependencies: `isomorphic-fetch` (only for [modules.SSR](#modulesssr)).
 ```bash
-npm install isomorphic-fetch
+$ npm install isomorphic-fetch
 ```
 
 Example:
@@ -487,7 +488,7 @@ core.req.fetch('get', 'https://example2.com/api/users', data, headers).then(...)
 
 Dependencies: `react-helmet`.
 ```bash
-npm install react-helmet
+$ npm install react-helmet
 ```
 
 See [React Helmet](https://github.com/nfl/react-helmet).
