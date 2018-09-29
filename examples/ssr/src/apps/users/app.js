@@ -1,4 +1,4 @@
-import { base } from 'react-apps'
+import { base } from 'react-rambo'
 
 
 export default class UsersApp extends base.BaseApp {

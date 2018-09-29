@@ -1,4 +1,5 @@
 import Logger from './Logger'
+/** global: jest */
 
 
 it('test simple methods', () => {

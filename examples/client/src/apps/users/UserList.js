@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Core } from 'react-apps'
+import { Core } from 'react-rambo'
 import PropTypes from 'prop-types'
 import coreConfig from '../../coreConfig'
 
@@ -32,7 +32,7 @@ class UserList extends Component {
                 ))}
                 <br />
                 <a
-                    href="https://github.com/expert-m/react-apps/tree/master/examples/client"
+                    href="https://github.com/expert-m/react-rambo/tree/master/examples/client"
                     target="_blank"
                     rel="noopener noreferrer"
                 >GitHub</a>

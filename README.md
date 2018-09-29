@@ -1,9 +1,12 @@
-# react-apps
+# react-rambo
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/expert-m/react-rambo/master/logo.jpg" alt="react-rambo" />
+</p>
+
 > Develop your React applications quickly and easily!
 
-[![NPM](https://nodei.co/npm/react-apps.png?compact=true)](https://www.npmjs.com/package/react-apps)
-
-[![NPM](https://img.shields.io/npm/v/react-apps.svg?style=flat-square)](https://www.npmjs.com/package/react-apps)  [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/expert-m/react-apps.svg?style=flat-square)](https://scrutinizer-ci.com/g/expert-m/react-apps/?branch=master)  [![Build Status](https://img.shields.io/scrutinizer/build/g/expert-m/react-apps.svg?style=flat-square)](https://scrutinizer-ci.com/g/expert-m/react-apps/build-status/master)  [![GitHub Issues](https://img.shields.io/github/issues/expert-m/react-apps.svg?style=flat-square)](https://github.com/expert-m/react-apps/issues)  [![Gitter](https://img.shields.io/badge/gitter-join_chat-blue.svg?style=flat-square)](https://gitter.im/expert-m/react-apps)  [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![NPM](https://img.shields.io/npm/v/react-rambo.svg?style=flat-square)](https://www.npmjs.com/package/react-rambo)  [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/expert-m/react-rambo.svg?style=flat-square)](https://scrutinizer-ci.com/g/expert-m/react-rambo/?branch=master)  [![Build Status](https://img.shields.io/scrutinizer/build/g/expert-m/react-rambo.svg?style=flat-square)](https://scrutinizer-ci.com/g/expert-m/react-rambo/build-status/master)  [![GitHub Issues](https://img.shields.io/github/issues/expert-m/react-rambo.svg?style=flat-square)](https://github.com/expert-m/react-rambo/issues)  [![peerDependencies Status](https://david-dm.org/expert-m/react-rambo/peer-status.svg?style=flat-square)](https://david-dm.org/expert-m/react-rambo?type=peer)  [![Gitter](https://img.shields.io/badge/gitter-join_chat-blue.svg?style=flat-square)](https://gitter.im/expert_m/react-rambo)  [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 
 ## Table Of Contents
@@ -29,21 +32,35 @@
 
 #### npm
 ```bash
-npm install react-apps
+npm install react-rambo
 ```
 
 #### yarn
 ```bash
-yarn add react-apps
+yarn add react-rambo
+```
+
+*If you want to use all modules:*
+
+```bash
+npm install react-rambo react-dom react-helmet redux react-redux react-router-config react-router-dom
+npm install --save-dev express isomorphic-fetch
+```
+
+or
+
+```bash
+yarn add react-rambo react-dom react-helmet redux react-redux react-router-config react-router-dom
+yarn add --dev express isomorphic-fetch
 ```
 ---
 
 ## How To Use
-Examples:
-* [First](https://github.com/expert-m/react-apps/tree/master/examples/client) ([Demo](https://expert-m.github.io/react-apps/))
-* [Second](https://github.com/expert-m/react-apps/tree/master/examples/ssr) (with SSR)
+**Examples:**
+* [First](https://github.com/expert-m/react-rambo/tree/master/examples/client) ([Demo](https://expert-m.github.io/react-rambo/))
+* [Second](https://github.com/expert-m/react-rambo/tree/master/examples/ssr) (with SSR)
 
-**react-apps** includes many ready solutions (`modules`) for different purposes. A list of `modules` must be specified when creating `Core`.
+**react-rambo** includes many ready solutions (`modules`) for different purposes. A list of `modules` must be specified when creating `Core`.
 ```js
 const config = {
     modules: [modules.Store, modules.Apps],
@@ -57,7 +74,7 @@ core = Core.getInstance(() => config) // Calls a function if `Core` is not creat
 ```
 By adding modules you can change a behavior of your application.
 
-Example:
+Examples:
 
 - [modules.Store](#modulesstore-redux), [modules.Apps](#modulesapps) - allows you to create `Redux` store through `Core`.
 - [modules.Store](#modulesstore-redux), [modules.Apps](#modulesapps), [modules.SSR](#modulesssr) - now you can easily render your application on a server.
@@ -69,7 +86,7 @@ Example:
 
 *app.js:*
 ```js
-import { base } from 'react-apps'
+import { base } from 'react-rambo'
 
 export default class UsersApp extends base.BaseApp {
     name = 'users'
@@ -151,7 +168,7 @@ connect(mapStateToProps, mapDispatchToProps)(UserList)
 
 *index.js:*
 ```jsx
-import { Core } from 'react-apps'
+import { Core } from 'react-rambo'
 
 const core = Core.getInstance(coreConfig)
 
@@ -165,7 +182,7 @@ ReactDOM.render(
 
 *coreConfig.js:*
 ```js
-import { modules } from 'react-apps'
+import { modules } from 'react-rambo'
 
 const config = {
     modules: [modules.Store, modules.Apps],
@@ -388,7 +405,7 @@ Dependencies: `express`, `react-dom`, `serialize-javascript`.
 npm install express react-dom serialize-javascript
 ```
 
-- You have to install [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) if want use module [modules.Requests](#modulesrequests) in SSR:
+- You have to install [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) if you want to use module [modules.Requests](#modulesrequests) in SSR:
 ```bash
 npm install isomorphic-fetch
 ```
@@ -480,7 +497,7 @@ See [React Helmet](https://github.com/nfl/react-helmet).
 ---
 
 ## How To Create A New Module
-See [/src/modules/](https://github.com/expert-m/react-apps/tree/master/src/modules).
+See [/src/modules/](https://github.com/expert-m/react-rambo/tree/master/src/modules).
 
 [back to top](#table-of-contents)
 

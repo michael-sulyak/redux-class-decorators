@@ -45,7 +45,7 @@ it('core.hasModule()', () => {
     }
 
     const core = new Core({
-        modules: [ TestModule ],
+        modules: [TestModule],
     })
 
 

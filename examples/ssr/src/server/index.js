@@ -8,7 +8,7 @@ const path = require('path')
 const express = require('express')
 const serialize = require('serialize-javascript')
 const serveStatic = require('serve-static')
-const { Core } = require('react-apps')
+const { Core } = require('react-rambo')
 const getCoreConfig = require('../coreConfig').default
 const assets = require('../../build/asset-manifest.json')
 

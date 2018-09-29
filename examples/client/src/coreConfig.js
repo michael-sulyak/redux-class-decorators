@@ -1,4 +1,4 @@
-import { modules } from 'react-apps'
+import { modules } from 'react-rambo'
 import UsersApp from './apps/users/app'
 import { createLogger } from 'redux-logger'
 

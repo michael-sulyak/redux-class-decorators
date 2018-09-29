@@ -1,6 +1,5 @@
 {
-  "name": "react-apps-ssr-example",
-  "homepage": "https://expert-m.github.io/react-apps",
+  "name": "react-rambo-ssr-example",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
@@ -9,8 +8,8 @@
     "isomorphic-fetch": "^2.2.1",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
-    "react-apps": "link:../..",
-    "react-dom": "^16.4.1",
+    "react-rambo": "link:../..",
+    "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
     "react-router-config": "^1.0.0-beta.4",
     "react-router-dom": "^4.3.1",

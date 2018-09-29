@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import coreConfig from './coreConfig'
-import { Core } from 'react-apps'
+import { Core } from 'react-rambo'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { renderRoutes } from 'react-router-config'
