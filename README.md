@@ -1,8 +1,8 @@
-<h1 align="center">
+<p align="center">
     <img src="https://raw.githubusercontent.com/expert-m/react-rambo/master/logo.png" alt="react-rambo" />
-    <br>
-    react-rambo
-</h1>
+</p>
+
+<h1 align="center">react-rambo</h1>
 
 <h4 align="center">Develop your React applications quickly and easily!</h4>
 
