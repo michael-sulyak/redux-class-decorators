@@ -1,6 +1,6 @@
 {
   "name": "react-rambo",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "Develop your React applications quickly and easily!",
   "author": "expert-m",
   "license": "MIT",
@@ -32,7 +32,6 @@
     "router",
     "express",
     "modules",
-    "apps",
     "blocks"
   ],
   "devDependencies": {
