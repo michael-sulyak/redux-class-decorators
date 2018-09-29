@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="https://raw.githubusercontent.com/expert-m/react-rambo/master/logo.jpg" alt="react-rambo" />
+    <img src="https://raw.githubusercontent.com/expert-m/react-rambo/master/logo.png" alt="react-rambo" />
     <br>
     react-rambo
 </h1>
