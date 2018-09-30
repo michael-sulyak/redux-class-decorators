@@ -107,7 +107,7 @@ export default class UsersApp extends base.BaseApp {
     name = 'users'
     mount(data) {
         describeApp(this, this.core.req)
-        return true // Must return `true`. Otherwise the application will not be added.
+        return true // Must return `true`. Otherwise, the application will not be added.
     }
 }
 
@@ -240,10 +240,10 @@ const initialState = {
 function reducer(state = initialState, action) {
     switch (action.type) {
         case 'users.list.start':
-            state.user.list = { ...state.user.list, loading: true }
+            state.users.list = { ...state.users.list, loading: true }
             return { ...state }
         case 'users.list.finish':
-            state.user.list = { ...state.user.list, loading: false, value: action.payload }
+            state.users.list = { ...state.users.list, loading: false, value: action.payload }
             return { ...state }
         default: return state
     }
@@ -396,6 +396,7 @@ $ npm install react-router react-router-config react-router-dom
 ```
 
 **Example:**
+
 *coreConfig.js*
 ```js
 const routes = [{
