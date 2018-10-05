@@ -4,7 +4,7 @@
 
 <h1 align="center">react-rambo</h1>
 
-<h4 align="center">New way of simple application development with React and Redux!</h4>
+<h4 align="center">Simple creation of actions and reducers in Redux</h4>
 
 <p align="center">
     <a href="https://www.npmjs.com/package/react-rambo"><img src="https://img.shields.io/npm/v/react-rambo.svg?style=flat-square" alt="NPM"></a>  <a href="https://scrutinizer-ci.com/g/expert-m/react-rambo/?branch=master"><img src="https://img.shields.io/scrutinizer/g/expert-m/react-rambo.svg?style=flat-square" alt="Scrutinizer Code Quality"></a>  <a href="https://scrutinizer-ci.com/g/expert-m/react-rambo/build-status/master"><img src="https://img.shields.io/scrutinizer/build/g/expert-m/react-rambo.svg?style=flat-square" alt="Build Status"></a>  <a href="https://github.com/expert-m/react-rambo/issues"><img src="https://img.shields.io/github/issues/expert-m/react-rambo.svg?style=flat-square" alt="GitHub Issues"></a>  <a href="https://gitter.im/expert_m/react-rambo"><img src="https://img.shields.io/badge/gitter-join_chat-blue.svg?style=flat-square" alt="Gitter"></a>  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License"></a>
@@ -16,9 +16,9 @@
 - [Installation](#installation)
     - [npm](#npm)
     - [yarn](#yarn)
+- [Overview](#overview)
 - [Blocks](#blocks)
 - [Dynamic Blocks](#dynamic-blocks)
-- [Examples](#examples)
 - [License](#license)
 
 ---
@@ -35,12 +35,18 @@ npm install react-rambo
 yarn add react-rambo
 ```
 
+*You also have to add [redux-thunk](https://github.com/reduxjs/redux-thunk).*
+
 ---
 
-## Blocks
-> `Blocks` is a new way of simple application development with React and Redux.
+# Overview
 
-Old way (without `Blocks`): :disappointed_relieved:
+You have to create actions and reducers in different places when you add API calls. And this is too tiring...
+
+Example:
+<details>
+<summary>Sad code :disappointed_relieved:</summary>
+
 ```js
 // actions.js
 function startFetchingUserList() {
@@ -87,7 +93,18 @@ const mapDispatchToProps = (dispatch) => ({
 })
 ...
 ```
-New way (with `Blocks`): :blush:
+</details>
+
+`react-rambo` provides a new way to create actions and reducers. And now you do not need to create a bunch of files and write many lines of code. You just use [Blocks](#blocks)!
+
+Examples of using `react-rambo` :
+
+* [Simple](https://github.com/expert-m/react-rambo/tree/master/examples/simple) ([Demo](https://expert-m.github.io/react-rambo/))
+
+## Blocks
+> `Blocks` is a new way of simple application development with React and Redux :blush:
+
+Example:
 ```js
 import { block } from 'react-rambo'
 
@@ -100,7 +117,7 @@ const UserListBlock = block({
     },
     methods: {
         get: (params) => (dispatch, getState) => {
-            dispatch('start')
+            dispatch('start') // can be written down like dispatch('#UserList.start')
             return fetch('https://reqres.in/api/users').then(
                 response => response.json()
             ).then(json => dispatch('finish', json.data))
@@ -125,9 +142,13 @@ And now:
 - Less code.
 - Easier.
 
-`dispatch('start')` can be written down like `dispatch('#UserList.start')`.
+Explanation:
+ - `name` is used for action types.
+ - `initialState` is a usual starting value for a state.
+ - `reducer` is similar to a regular reducer from Redux. But here each key in the dictionary is a type of action.
+ - `methods` is a dictionary with functions that return a action.
 
-*index.js* with combineReducers
+`index.js` with combineReducers:
 ```jsx
 import { applyMiddleware, combineReducers, createStore } from 'redux'
 import thunk from 'redux-thunk'
@@ -150,6 +171,8 @@ ReactDOM.render(
 ---
 
 ## Dynamic Blocks
+> `Dynamic Blocks` allows you to use one `block` to work with different instances.
+
 Example:
 ```js
 // blocks.js
@@ -203,11 +226,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(MyComponent)
 [back to top](#table-of-contents)
 
 ---
-
-## Examples
-
-* [Simple](https://github.com/expert-m/react-rambo/tree/master/examples/simple) ([Demo](https://expert-m.github.io/react-rambo/))
-
 
 ## License
 MIT
