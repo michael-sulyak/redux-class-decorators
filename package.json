@@ -1,7 +1,7 @@
 {
   "name": "react-rambo",
   "version": "2.0.0-beta.0",
-  "description": "New way of simple application development with React and Redux!",
+  "description": "Simple creation of actions and reducers in Redux.",
   "author": "expert-m",
   "license": "MIT",
   "repository": "expert-m/react-rambo",
