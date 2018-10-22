@@ -5,4 +5,4 @@
 yarn start
 ```
 
-[back to react-rambo](https://github.com/expert-m/react-rambo)
+[back to redux-class-decorators](https://github.com/expert-m/redux-class-decorators)

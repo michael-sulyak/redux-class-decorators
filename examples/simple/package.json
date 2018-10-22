@@ -1,6 +1,6 @@
 {
-  "name": "react-rambo-simple-example",
-  "homepage": "https://expert-m.github.io/react-rambo",
+  "name": "redux-class-decorators-simple-example",
+  "homepage": "https://expert-m.github.io/redux-class-decorators",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
@@ -8,7 +8,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-rambo": "link:../..",
+    "redux-class-decorators": "link:../..",
     "react-redux": "^5.0.7",
     "react-scripts": "^1.1.4",
     "redux": "^4.0.0",

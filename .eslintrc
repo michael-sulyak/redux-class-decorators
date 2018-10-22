@@ -14,18 +14,13 @@
         "sourceType": "module"
     },
     "rules": {
-        // don't force es6 functions to include space before paren
         "space-before-function-paren": 0,
-        // allow specifying true explicitly for boolean props
         "react/jsx-boolean-value": 0,
-        "indent": ["error", 4, {"SwitchCase": 1}],
-        "react/jsx-indent": ["error", 4],
         "no-multiple-empty-lines": ["error", {
             "max": 2
         }],
         "comma-dangle": ["error", "only-multiline"],
-        "jsx-quotes": ["error", "prefer-double"],
-        "react/jsx-indent-props": ["error", 4]
+        "jsx-quotes": ["error", "prefer-double"]
     },
     "settings": {
         "react": {

@@ -1,226 +1,167 @@
-<p align="center">
-    <img src="https://raw.githubusercontent.com/expert-m/react-rambo/master/logo.png" alt="react-rambo" />
-</p>
+# redux-class-decorators
 
-<h1 align="center">react-rambo</h1>
-
-<h4 align="center">Simple creation of actions and reducers in Redux</h4>
-
-<p align="center">
-    <a href="https://www.npmjs.com/package/react-rambo"><img src="https://img.shields.io/npm/v/react-rambo.svg?style=flat-square" alt="NPM"></a>  <a href="https://scrutinizer-ci.com/g/expert-m/react-rambo/?branch=master"><img src="https://img.shields.io/scrutinizer/g/expert-m/react-rambo.svg?style=flat-square" alt="Scrutinizer Code Quality"></a>  <a href="https://scrutinizer-ci.com/g/expert-m/react-rambo/build-status/master"><img src="https://img.shields.io/scrutinizer/build/g/expert-m/react-rambo.svg?style=flat-square" alt="Build Status"></a>  <a href="https://github.com/expert-m/react-rambo/issues"><img src="https://img.shields.io/github/issues/expert-m/react-rambo.svg?style=flat-square" alt="GitHub Issues"></a>  <a href="https://gitter.im/expert_m/react-rambo"><img src="https://img.shields.io/badge/gitter-join_chat-blue.svg?style=flat-square" alt="Gitter"></a>  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License"></a>
-</p>
-
-<br>
+[![NPM](https://img.shields.io/npm/v/redux-class-decorators.svg?style=flat-square)](https://www.npmjs.com/package/redux-class-decorators)  [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/expert-m/redux-class-decorators.svg?style=flat-square)](https://scrutinizer-ci.com/g/expert-m/redux-class-decorators/?branch=master)  [![Build Status](https://img.shields.io/scrutinizer/build/g/expert-m/redux-class-decorators.svg?style=flat-square)](https://scrutinizer-ci.com/g/expert-m/redux-class-decorators/build-status/master)  [![GitHub Issues](https://img.shields.io/github/issues/expert-m/redux-class-decorators.svg?style=flat-square)](https://github.com/expert-m/redux-class-decorators/issues)  [![Gitter](https://img.shields.io/badge/gitter-join_chat-blue.svg?style=flat-square)](https://gitter.im/expert_m/redux-class-decorators)  [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 ## Table Of Contents
 - [Installation](#installation)
     - [npm](#npm)
     - [yarn](#yarn)
-- [Overview](#overview)
-- [Blocks](#blocks)
-- [Dynamic Blocks](#dynamic-blocks)
+- [Overview](#overviewe)
+- [How To Use](#how-to-use)
+- [Bonus](#bonus)
 - [License](#license)
-
----
 
 ## Installation
 
 #### npm
 ```bash
-npm install react-rambo
+npm install redux-class-decorators
 ```
 
 #### yarn
 ```bash
-yarn add react-rambo
+yarn add redux-class-decorators
 ```
-
-*You also have to add [redux-thunk](https://github.com/reduxjs/redux-thunk).*
 
 ---
 
 # Overview
+Writing reducers can be annoying, it takes time to create actionTypes, and actions, and to put it all into a switch. The benefits of this package is that you don't have to manage a separate actionTypes file. You get to define actions and a reducer in classes and all your types and API calls will live on just some objects. Just a matter of preference.
 
-You have to create actions and reducers in different places when you add API calls. And this is too tiring...
-
-Example:
-<details>
-<summary>Sad code :disappointed_relieved:</summary>
-
-```js
-// actions.js
-function startFetchingUserList() {
-    return { type: 'users.list.start' }
-}
-function finishFetchingUserList(payload) {
-    return { type: 'users.list.finish', payload }
-}
-
-// reducer.js
-const initialState = {
-    users: { list: { loading: false, value: null } }
-}
-function reducer(state = initialState, action) {
-    switch (action.type) {
-        case 'users.list.start':
-            state.users.list = { ...state.users.list, loading: true }
-            return { ...state }
-        case 'users.list.finish':
-            state.users.list = { ...state.users.list, loading: false, value: action.payload }
-            return { ...state }
-        default:
-            return state
-    }
-}
-
-// some.js
-fetchUser(params) {
-    return (dispatch, getState) => {
-        dispatch(startFetchingUserList())
-        return fetch('https://reqres.in/api/users').then(
-                response => response.json()
-        ).then(json => dispatch('finish', json.data))
-    }
-}
-
-// SomeComponent.js
-...
-const mapStateToProps = (state) => ({
-    userList: state.users.list,
-})
-const mapDispatchToProps = (dispatch) => ({
-    getUserList: bindActionCreators(fetchUser, dispatch),
-})
-...
-```
-</details>
-
-`react-rambo` provides a new way to create actions and reducers. And now you do not need to create a bunch of files and write many lines of code. You just use [Blocks](#blocks)!
-
-Examples of using `react-rambo` :
-
-* [Simple](https://github.com/expert-m/react-rambo/tree/master/examples/simple) ([Demo](https://expert-m.github.io/react-rambo/))
-
-## Blocks
-> `Blocks` is a new way of simple application development with React and Redux :blush:
-
-Example:
-```js
-import { block } from 'react-rambo'
-
-const UserListBlock = block({
-    name: 'UserList',
-    initialState: { loading: false, value: null },
-    reducer: {
-        start: (state, action) => ({ ...state, loading: true }),
-        finish: (state, action) => ({ ...state, loading: false, value: action.payload }),
-    },
-    methods: {
-        get: (params) => (dispatch, getState) => {
-            dispatch('start') // can be written down like dispatch('#UserList.start')
-            return fetch('https://reqres.in/api/users').then(
-                response => response.json()
-            ).then(json => dispatch('finish', json.data))
-        },
-    },
-})
-
-// SomeComponent.js
-...
-const mapStateToProps = (state) => ({
-    userList: state.users.list,
-})
-const mapDispatchToProps = (dispatch) => ({
-    getUserList: bindActionCreators(UserListBlock.get, dispatch),
-})
-...
-```
-
-And now:
-
-- All in one file.
-- Less code.
-- Easier.
-
-Explanation:
- - `name` is used for action types.
- - `initialState` is a usual starting value for a state.
- - `reducer` is similar to a regular reducer from Redux. But here each key in the dictionary is a type of action.
- - `methods` is a dictionary with functions that return a action.
-
-`index.js` with combineReducers:
-```jsx
-import { applyMiddleware, combineReducers, createStore } from 'redux'
-import thunk from 'redux-thunk'
-
-const rootReducer = combineReducers({
-    users: combineReducers({
-        list: UserListBlock._reducer,
-    }),
-})
-const store = createStore(rootReducer, {}, applyMiddleware(thunk))
-
-ReactDOM.render(
-    <Provider store={store}><SomeComponent /></Provider>,
-    document.getElementById('root'),
-)
-```
+You haven't to declare or manage string constants. This package meets the standard for stream action objects and will automatically declare string constants for types.
 
 [back to top](#table-of-contents)
 
 ---
 
-## Dynamic Blocks
-> `Dynamic Blocks` allows you to use one `block` to work with different instances.
+# How To Use
+Redux recommends creating constants, action creators and reducers separately. And we try to stick to this rule.
 
-Example:
+Reducer:
 ```js
-// blocks.js
-import { dynamicBlock } from 'react-rambo'
+import { ReducerClass } from 'redux-class-decorators'
 
-const BannerListBlock = dynamicBlock({
-    name: 'BannerList',
-    initialState: { loading: false, value: null },
-    index: 'type', // is an important parameter
-    reducer: {
-        start: (state, action) => ({ ...state, loading: true }),
-        finish: (state, action) => ({ ...state, loading: false, value: action.payload }),
-    },
-    methods: {
-        get: (params) => ((dispatch, getState) => {
-            dispatch('start')
-            return new Promise(resolve => {
-                setTimeout(() => {
-                    dispatch('finish', 'TEST')
-                    resolve()
-                }, 1000)
-            })
-        }),
-    },
-})
+@ReducerClass
+class SomeReducer {
+  static initialState = { value: 0 }
 
-// MyComponent.js
-class MyComponent extends Component {
-    componentDidMount() {
-        this.props.getBanner({ type: 'left' }) // A index (`type` in this case) must be present in the arguments.
-        this.props.getBanner({ type: 'right' })
+  static setValue(state, action) {
+    return {
+      ...state,
+      value: action.payload,
     }
-    render() {
-        const { banners } = this.props
-        return <div>
-            Left banner: {banners.left ? (banners.left.loading ? 'Loading...' : banners.left.value) : '---'}<br/>
-            Right banner: {banners.right ? (banners.right.loading ? 'Loading...' : banners.left.value) : '---'}<br/>
-        </div>
+  }
+
+  static clear(state) {
+    return {
+      ...state,
+      value: SomeReducer.initialState.value,
     }
+  }
 }
+```
 
-const mapStateToProps = (state) => ({
-    banners: state.banners,
-})
-const mapDispatchToProps = (dispatch) => ({
-    getBanner: bindActionCreators(BannerListBlock.get, dispatch),
-})
-export default connect(mapStateToProps, mapDispatchToProps)(MyComponent)
+Actions:
+```js
+import { ActionClass } from 'redux-class-decorators'
+
+@ActionClass
+class Something {
+  static set(newValue) {
+    return (dispatch, getState) => {
+      dispatch({
+        type: SomeReducer.setValue,
+        payload: newValue,
+      })
+    }
+  }
+
+  static clear() {
+    return {
+      type: SomeReducer.clear,
+    }
+  }
+}
+```
+
+Usage:
+```js
+// Create store
+const store = createStore(SomeReducer.$reducer, null, applyMiddleware(thunk))
+
+// Get dispatch
+const dispatch = store.dispatch
+
+dispatch(Something.set(5)) // { type: 'SOME_REDUCER__SET_VALUE', payload: 5 }
+dispatch(Something.set(10)) // { type: 'SOME_REDUCER__SET_VALUE', payload: 10 }
+// state = { value: 10 }
+
+dispatch(Something.clear()) // { type: 'SOME_REDUCER__SET_CLEAR' }
+// state = { value: 0 }
+```
+
+Example of using `redux-class-decorators`:
+* [Simple](https://github.com/expert-m/redux-class-decorators/tree/master/examples/simple) ([Demo](https://expert-m.github.io/redux-class-decorators/))
+
+[back to top](#table-of-contents)
+
+---
+
+## Bonus
+> `PlumbingActionClass` allows you to use one class to work with different instances.
+
+Reducer:
+```js
+import { PlumbingReducerClass } from 'redux-class-decorators'
+
+@PlumbingReducerClass('Banner')
+class BannerReducer {
+  static $getInitialState() {
+    return {
+      loading: false,
+      value: null,
+    }
+  }
+
+  static setValue(state, action) {
+    return {
+      ...state,
+      value: action.payload,
+    }
+  }
+}
+```
+
+Actions:
+```js
+import { PlumbingActionClass } from 'redux-class-decorators'
+
+@PlumbingActionClass
+class Banner {
+  static $getIndex(params) {
+    return params.type
+  }
+
+  static add(newValue) {
+     return {
+       type: BannerReducer.setValue,
+       payload: newValue,
+     }
+  }
+}
+```
+
+Usage:
+```js
+// Create store
+const store = createStore(BannerReducer.$reducer, null, applyMiddleware(thunk))
+
+// Get dispatch
+const dispatch = store.dispatch
+
+dispatch(Banner.add({ type: 'left', text: 'Test1' })) // { type: 'SOME_REDUCER__SET_VALUE', payload: 5 }
+dispatch(Banner.add({ type: 'right', text: 'Test2' })) // { type: 'SOME_REDUCER__SET_VALUE', payload: 10 }
+// state = { value: 10 }
 ```
 
 [back to top](#table-of-contents)

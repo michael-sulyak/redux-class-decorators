@@ -1,16 +1,12 @@
-import Block from './Block'
-import DynamicBlock from './DynamicBlock'
+import ReducerClass from './ReducerClass'
+import ActionClass from './ActionClass'
+import PlumbingReducerClass from './PlumbingReducerClass'
+import PlumbingActionClass from './PlumbingActionClass'
 
-
-function block(data) {
-    return new Block(data)
-}
-
-function dynamicBlock(data) {
-    return new DynamicBlock(data)
-}
 
 export {
-    block,
-    dynamicBlock,
+  ReducerClass,
+  ActionClass,
+  PlumbingReducerClass,
+  PlumbingActionClass,
 }
