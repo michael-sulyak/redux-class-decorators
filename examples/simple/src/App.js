@@ -48,8 +48,10 @@ class App extends Component {
         <h1 className="App-title">Something</h1>
         {something ? (
           <div>
+            {something[2] && something[2].loading && <div>Loading...</div>}
             {something[2] && something[2].value &&
             <div>{something[2].value.name}</div>}
+            {something[5] && something[5].loading && <div>Loading...</div>}
             {something[5] && something[5].value &&
             <div>{something[5].value.name}</div>}
           </div>

@@ -12,6 +12,7 @@ class BaseUserReducer {
   static start(state, action) {
     return {
       ...state,
+      loading: true,
       value: action.payload,
     }
   }
@@ -51,6 +52,7 @@ class SomethingReducer {
   static start(state, action) {
     return {
       ...state,
+      loading: true,
       value: action.payload,
     }
   }
