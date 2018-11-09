@@ -118,7 +118,6 @@ import { PlumbingReducerClass } from 'redux-class-decorators'
 class BannerReducer {
   static $getInitialState() {
     return {
-      loading: false,
       value: null,
     }
   }
@@ -161,7 +160,7 @@ const dispatch = store.dispatch
 
 dispatch(Banner.add({ type: 'left', text: 'Test1' })) // { type: 'SOME_REDUCER__SET_VALUE', payload: 5 }
 dispatch(Banner.add({ type: 'right', text: 'Test2' })) // { type: 'SOME_REDUCER__SET_VALUE', payload: 10 }
-// state = { value: 10 }
+// state = { 'left': { value: 'Test1' }, 'right': { value: 'Test2' } }
 ```
 
 [back to top](#table-of-contents)
