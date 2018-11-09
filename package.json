@@ -71,5 +71,8 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "resolutions": {
+    "babel-core": "^7.1.0"
+  }
 }
