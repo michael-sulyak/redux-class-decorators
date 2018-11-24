@@ -41,7 +41,7 @@ Reducer:
 ```js
 import { ReducerClass } from 'redux-class-decorators'
 
-@ReducerClass
+@ReducerClass('SomeReducer')
 class SomeReducer {
   static initialState = { value: 0 }
 
