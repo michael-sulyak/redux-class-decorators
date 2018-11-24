@@ -6,11 +6,11 @@
   "private": true,
   "dependencies": {
     "prop-types": "^15.6.2",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
     "redux-class-decorators": "link:../..",
-    "react-redux": "^5.0.7",
-    "react-scripts": "^1.1.4",
+    "react-redux": "^5.1.1",
+    "react-scripts": "^2.1.1",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0"
@@ -20,5 +20,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
