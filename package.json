@@ -1,6 +1,6 @@
 {
   "name": "redux-class-decorators",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Simple creation of actions and reducers in Redux.",
   "author": "expert-m",
   "license": "MIT",
@@ -61,12 +61,12 @@
     "react-scripts": "^2.1.1",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
-    "rollup": "^0.67.3",
+    "rollup": "^1.1.2",
     "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-commonjs": "^9.1.8",
-    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.0",
-    "rollup-plugin-postcss": "^1.6.3",
+    "rollup-plugin-postcss": "^2.0.0",
     "rollup-plugin-url": "^2.0.1"
   },
   "files": [
