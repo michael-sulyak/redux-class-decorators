@@ -17,7 +17,10 @@ export default function ActionClass(target) {
       if (action instanceof Function) {
         return async (dispatch, getState) => {
           const decoratedDispatch = (action) => {
-            replaceActionType(action)
+            if (action && 'type' in action) {
+              replaceActionType(action)
+            }
+
             return dispatch(action)
           }
 

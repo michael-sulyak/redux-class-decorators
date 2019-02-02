@@ -17,8 +17,11 @@ export default function PlumbingActionClass(target) {
       if (action instanceof Function) {
         return async (dispatch, getState) => {
           const decoratedDispatch = (action) => {
-            replaceActionType(action)
-            addIndexInMeta(target, action, arguments)
+            if (action && 'type' in action) {
+              replaceActionType(action)
+              addIndexInMeta(target, action, arguments)
+            }
+
             return dispatch(action)
           }
           return await action(decoratedDispatch, getState)
