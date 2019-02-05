@@ -67,7 +67,7 @@ export function pathReducerMethods(target, prefix) {
 }
 
 export function replaceActionType(action) {
-  if (action.type instanceof Function) {
+  if (action && 'type' in action && action.type instanceof Function) {
     action.type = action.type.actionType
   }
 }

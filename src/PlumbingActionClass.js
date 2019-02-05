@@ -17,10 +17,8 @@ export default function PlumbingActionClass(target) {
       if (action instanceof Function) {
         return async (dispatch, getState) => {
           const decoratedDispatch = (action) => {
-            if (action && 'type' in action) {
-              replaceActionType(action)
-              addIndexInMeta(target, action, arguments)
-            }
+            replaceActionType(action)
+            addIndexInMeta(target, action, arguments)
 
             return dispatch(action)
           }
@@ -29,6 +27,7 @@ export default function PlumbingActionClass(target) {
       } else {
         replaceActionType(action)
         addIndexInMeta(target, action, arguments)
+
         return action
       }
     }
