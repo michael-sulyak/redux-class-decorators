@@ -59,3 +59,44 @@ it('test dispatch', () => {
   dispatch(Something.clear())
   expect(store.getState()).toEqual({ value: 0 })
 })
+
+
+it('test arguments', () => {
+  const myTestFunc = (value) => {
+    return value + 10
+  }
+
+  class SomeReducer {
+    static initialState = { value: 0 }
+
+    static setValue(state, action) {
+      return {
+        ...state,
+        value: action.payload,
+      }
+    }
+  }
+
+  ReducerClass('Some')(SomeReducer)
+
+  class Something {
+    static set(newValue) {
+      return (dispatch, getState, testFunc) => {
+        dispatch({
+          type: SomeReducer.setValue,
+          payload: newValue,
+        })
+      }
+    }
+  }
+
+  ActionClass(Something)
+
+  const store = createStore(SomeReducer.$reducer, undefined, applyMiddleware(thunk.withExtraArgument(myTestFunc)))
+  const dispatch = store.dispatch
+
+  expect(store.getState()).toEqual(SomeReducer.initialState)
+
+  dispatch(Something.set(5))
+  expect(store.getState()).toEqual({ value:   5 })
+})
