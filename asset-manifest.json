@@ -1,13 +1,13 @@
 {
-  "main.css": "/redux-class-decorators/static/css/main.b41cce41.chunk.css",
-  "main.js": "/redux-class-decorators/static/js/main.934b0f79.chunk.js",
-  "main.js.map": "/redux-class-decorators/static/js/main.934b0f79.chunk.js.map",
-  "static/js/1.70b7b4c6.chunk.js": "/redux-class-decorators/static/js/1.70b7b4c6.chunk.js",
-  "static/js/1.70b7b4c6.chunk.js.map": "/redux-class-decorators/static/js/1.70b7b4c6.chunk.js.map",
-  "runtime~main.js": "/redux-class-decorators/static/js/runtime~main.d4e0bf44.js",
-  "runtime~main.js.map": "/redux-class-decorators/static/js/runtime~main.d4e0bf44.js.map",
-  "static/css/main.b41cce41.chunk.css.map": "/redux-class-decorators/static/css/main.b41cce41.chunk.css.map",
+  "main.css": "/redux-class-decorators/static/css/main.f38d215d.chunk.css",
+  "main.js": "/redux-class-decorators/static/js/main.5c7538a5.chunk.js",
+  "main.js.map": "/redux-class-decorators/static/js/main.5c7538a5.chunk.js.map",
+  "runtime~main.js": "/redux-class-decorators/static/js/runtime~main.5fdac967.js",
+  "runtime~main.js.map": "/redux-class-decorators/static/js/runtime~main.5fdac967.js.map",
+  "static/js/2.85c43161.chunk.js": "/redux-class-decorators/static/js/2.85c43161.chunk.js",
+  "static/js/2.85c43161.chunk.js.map": "/redux-class-decorators/static/js/2.85c43161.chunk.js.map",
   "index.html": "/redux-class-decorators/index.html",
-  "precache-manifest.afbbe1b36354d3aaa5db3bd12f40a544.js": "/redux-class-decorators/precache-manifest.afbbe1b36354d3aaa5db3bd12f40a544.js",
-  "service-worker.js": "/redux-class-decorators/service-worker.js"
+  "precache-manifest.551c8ce8c74aafa2cd3f52a7836545bb.js": "/redux-class-decorators/precache-manifest.551c8ce8c74aafa2cd3f52a7836545bb.js",
+  "service-worker.js": "/redux-class-decorators/service-worker.js",
+  "static/css/main.f38d215d.chunk.css.map": "/redux-class-decorators/static/css/main.f38d215d.chunk.css.map"
 }
