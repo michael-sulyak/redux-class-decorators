@@ -28,7 +28,9 @@ yarn add redux-class-decorators
 # Overview
 Writing reducers can be annoying, it takes time to create actionTypes, and actions, and to put it all into a switch. The benefits of this package is that you don't have to manage a separate actionTypes file. You get to define actions and a reducer in classes and all your types and API calls will live on just some objects. Just a matter of preference.
 
-You haven't to declare or manage string constants. This package meets the standard for stream action objects and will automatically declare string constants for types.
+You haven't to declare or manage string constants. This package meets the standard for stream action objects and will automatically declare string constants for types. Also this package works well with [redux-thunk](https://github.com/reduxjs/redux-thunk).
+
+If you have any questions, you can see [examples of use](https://github.com/expert-m/redux-class-decorators/tree/master/examples).
 
 [back to top](#table-of-contents)
 
@@ -41,21 +43,33 @@ Reducer:
 ```js
 import { ReducerClass } from 'redux-class-decorators'
 
-@ReducerClass('SomeReducer')
-class SomeReducer {
-  static initialState = { value: 0 }
+@ReducerClass('Profile')
+class ProfileReducer {
+  static initialState = {
+    value: null,
+    loading: false,
+  }
 
-  static setValue(state, action) {
+  static startLoading(state, action) {
+    return {
+      ...state,
+      loading: true,
+    }
+  }
+
+  static finishLoading(state, action) {
     return {
       ...state,
       value: action.payload,
+      loading: false,
     }
   }
 
   static clear(state) {
     return {
       ...state,
-      value: SomeReducer.initialState.value,
+      value: null,
+      loading: false,
     }
   }
 }
@@ -66,19 +80,25 @@ Actions:
 import { ActionClass } from 'redux-class-decorators'
 
 @ActionClass
-class Something {
-  static set(newValue) {
+class ProfileActionSet {
+  static get() {
     return (dispatch, getState) => {
       dispatch({
-        type: SomeReducer.setValue,
-        payload: newValue,
+        type: ProfileReducer.startLoading,
+      })
+
+      const profile = { id: 1, name: 'Mike' }
+
+      dispatch({
+        type: ProfileReducer.finishLoading,
+        payload: profile,
       })
     }
   }
 
   static clear() {
     return {
-      type: SomeReducer.clear,
+      type: ProfileActionSet.clear,
     }
   }
 }
@@ -87,17 +107,19 @@ class Something {
 Usage:
 ```js
 // Create store
-const store = createStore(SomeReducer.$reducer, null, applyMiddleware(thunk))
+const store = createStore(ProfileReducer.$reducer, null, applyMiddleware(thunk))
 
 // Get dispatch
 const dispatch = store.dispatch
 
-dispatch(Something.set(5)) // { type: 'SOME_REDUCER__SET_VALUE', payload: 5 }
-dispatch(Something.set(10)) // { type: 'SOME_REDUCER__SET_VALUE', payload: 10 }
-// state = { value: 10 }
+dispatch(ProfileActionSet.get())
+// Actions:
+// { type: 'PROFILE__START_LOADING' }
+// { type: 'PROFILE__FINISH_LOADING', payload: { id: 1, name: 'Mike' } }
+// state == { value: { id: 1, name: 'Mike' }, loading: false }
 
-dispatch(Something.clear()) // { type: 'SOME_REDUCER__SET_CLEAR' }
-// state = { value: 0 }
+dispatch(Something.clear()) // { type: 'PROFILE__CLEAR' }
+// state == { value: null, loading: false }
 ```
 
 Example of using `redux-class-decorators`:
@@ -158,9 +180,13 @@ const store = createStore(BannerReducer.$reducer, null, applyMiddleware(thunk))
 // Get dispatch
 const dispatch = store.dispatch
 
-dispatch(Banner.add({ type: 'left', text: 'Test1' })) // { type: 'SOME_REDUCER__SET_VALUE', payload: 5 }
-dispatch(Banner.add({ type: 'right', text: 'Test2' })) // { type: 'SOME_REDUCER__SET_VALUE', payload: 10 }
-// state = { 'left': { value: 'Test1' }, 'right': { value: 'Test2' } }
+dispatch(Banner.add({ type: 'left', text: 'Test1' }))
+// { type: 'BANNER__SET_VALUE', payload: 5 }
+
+dispatch(Banner.add({ type: 'right', text: 'Test2' }))
+// { type: 'BANNER__SET_VALUE', payload: 10 }
+
+// state == { 'left': { value: 'Test1' }, 'right': { value: 'Test2' } }
 ```
 
 [back to top](#table-of-contents)
