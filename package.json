@@ -1,6 +1,6 @@
 {
   "name": "redux-class-decorators",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "Simple creation of actions and reducers in Redux.",
   "author": "expert-m",
   "license": "MIT",
