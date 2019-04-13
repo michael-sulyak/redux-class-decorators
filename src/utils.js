@@ -2,6 +2,10 @@ export class DecoratorHelper {
   static errorText = 'The object can\'t be decorated.'
 
   static isDecorated(target) {
+    /**
+     * Check whether the function is decoded or not.
+     */
+
     if (!(target instanceof Function)) {
       throw new Error(DecoratorHelper.errorText)
     }
@@ -15,14 +19,27 @@ export class DecoratorHelper {
   }
 
   static markAsDecorated(target) {
+    /**
+     * Marks a class that it is decorated.
+     */
+
     target.__isDecorated = true
   }
 
   static getStaticField(target, fieldName) {
+    /**
+     * Returns a class field.
+     */
+
     return target[fieldName]
   }
 
   static getStaticMethodNames(target) {
+    /**
+     * Returns all static class methods.
+     * Except those starting with _ or $.
+     */
+
     let properties = Object.getOwnPropertyNames(target)
     let prototype = Object.getPrototypeOf(target)
 
@@ -40,15 +57,27 @@ export class DecoratorHelper {
   }
 
   static getStaticMethod(target, methodName) {
+    /**
+     * Returns a class method.
+     */
+
     return target[methodName]
   }
 
   static setStaticMethod(target, methodName, method) {
+    /**
+     * Sets a new class method.
+     */
+
     target[methodName] = method
   }
 }
 
 export function toUnderscoreCase(text) {
+  /**
+   * Converts CamelCase to UnderscoreCase.
+   */
+
   return text.split(/(?=[A-Z])/).join('_').toUpperCase()
 }
 
